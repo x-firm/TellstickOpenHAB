@@ -15,6 +15,7 @@ Also included is a Linux service (init.d/openhab-tellstick) that starts a daemon
 The tellstick ID's in the tellstick.item file can be found using the tellcore_tool as below:
 
 pi@raspberrypi00 ~ $ tellcore_tool -l
+
 Number of devices: 9
 
 ID    NAME            STATE      PROTOCOL   MODEL                PARAMETERS
@@ -55,6 +56,7 @@ fineoffset      temperaturehumidity 30    0.0 C    0 %                          
 New devices can be identified using the tellcore_events tool thusly:
 
 pi@raspberrypi00 ~ $ tellcore_events --all
+
 [RAW] 1 <- class:command;protocol:waveman;model:codeswitch;house:A;unit:1;method:turnoff;
 [RAW] 1 <- class:sensor;protocol:fineoffset;id:255;model:temperature;temp:-204.7;
 [SENSOR] 255 [fineoffset/temperature] (1) @ 1409595745 <- -204.7
