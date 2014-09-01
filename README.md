@@ -8,7 +8,7 @@ This compilation depends on the python library for tellstick, 'tellcore.telldus'
 This particular setup runs on a Raspberry PI, but nothing is PI specific.
 
 Included is a python script (tellstick/tellstick-openhab.py) that sends REST requests to openHAB to notify of tellstick events not currently picked up by the openHAB tellstick binding. 
-Some modifications to this file is currently needed. Modifictaions include adding your own devices according to the pattern in the file. Also if openHAB is running on another machine the base URL to that machine must also be updated. Default is 'locslhost:8080'.
+Some modifications to this file is currently needed. Modifictaions include adding your own devices according to the pattern in the file. Also if openHAB is running on another machine the base URL to that machine must also be updated. Default is 'locslhost:8080'. The path to where the 'tellstick-openhab.py' file must also be updated.
 
 
 Also included is a Linux service (init.d/openhab-tellstick) that starts a daemon running above mentioned python script, this should be copied to /etc/init.d.
