@@ -1,0 +1,62 @@
+Group All
+Group gGF 	(All)
+Group gFF 	(All)
+Group gC 	(All)
+Group Outdoor 	(All)
+Group Weather 	(All)
+Group Status 	(All)
+
+Group GF_Living 	"Living Room" 	<video> 	(gGF)
+Group GF_Kitchen 	"Kitchen" 	<kitchen> 	(gGF)
+Group GF_Corridor 	"Corridor" 	<corridor> 	(gGF)
+
+Group FF_Bed 		"Bedroom" 	<bedroom> 	(gFF)
+Group FF_Office		"Office" 	<office> 	(gFF)
+Group FF_Tea		"Teas room" 	<bedroom> 	(gFF)
+
+/* active groups */
+Group:Switch:OR(ON, OFF) 		Lights 		"All Lights [(%d)]"					(All)
+Group:Number:AVG 			Temperature	"Avg. Room Temperature [%.1f °C]" 	 <temperature>	(Status)
+Group:Contact:OR(OPEN, CLOSED) 		Windows	"Open windows [(%d)]"				<contact>	(All)
+
+/* Lights */
+Switch Light_GF_Corridor_Window 	"Window Lamp" 		(GF_Corridor, Lights) {tellstick="6:Command"}
+Switch Light_GF_Living_Window 		"Window Lamp" 		(GF_Living,   Lights) {tellstick="5:Command"}
+Switch Light_GF_Kitchen_Window 		"Window Lamp" 		(GF_Kitchen,  Lights) {tellstick="4:Command"}
+Switch Light_FF_Guestroom 		"Window Lamp" 	    	(gFF, Lights)         {tellstick="7:Command"}
+Switch Light_FF_Office_Desk 		"Desk" 		    	(FF_Office)           {tellstick="8:Command"}
+Switch Light_FF_Tea                     "Window Lamp" 	    	(FF_Tea, Lights)      {tellstick="9:Command"}
+
+Group Weather_Chart	(Weather)
+
+Number Weather_Temperature 		"Outside Temperature [%.1f °C]"	<temperature> (Weather_Chart) { http="<[http://weather.yahooapis.com/forecastrss?w=906057&u=c:60000:XSLT(yahoo_weather_temperature.xsl)]" }
+Number Weather_Temp_Max 		"Todays Maximum [%.1f °C]"	<temperature> (Weather_Chart)
+Number Weather_Temp_Min 		"Todays Minimum [%.1f °C]"	<temperature> (Weather_Chart)
+Number Weather_Chart_Period		"Chart Period"
+DateTime Weather_LastUpdate		"Last Update [%1$ta %1$tR]"	<clock>
+
+/* NTP binding demo item */
+DateTime		Date			"Date [%1$tA,  %1$tY-%1$tm-%1$td]"	<calendar>	{ ntp="Europe/Berlin:de_DE" }
+
+Number TempOutdoor     "Outside Office Temperature [%.1f °C]" <temperature>   (Temperature)      {tellstick="229:Temperature"}
+
+Number TempBedroom     "Tellstick device 21 Temp [%.1f °C]" <temperature>   (Temperature, FF_Bed, Status)      {tellstick="21:Temperature"}
+Number HumidityBedroom "Tellstick device 21 Humidity [%.1f]" <temperature>   (FF_Bed) {tellstick="21:Humidity"}
+
+Number TempOffice     "Tellstick device 22 Temp [%.1f °C]"  <temperature>   (Temperature, FF_Office, Status)    {tellstick="22:Temperature"}
+Number HumidityOffice "Tellstick device 22 Humidity [%.1f]" <temperature>   (FF_Office)       {tellstick="22:Humidity"}
+
+Switch PlayOffice {sonos="[ON:office:play], [OFF:office:pause]"}
+/*Switch StopLivingRoom {sonos="*[ON:office:stop]"}*/
+
+/* Tellstick items defined in tellstick/tellstick-openhab.py */
+
+Contact MotionDetectorHall "Motion Detector Hall" 
+Contact MotionDetectorOut  "Motion Detector Outside" 
+
+Contact MagSwitchCellar    "Magnetic Switch Cellar" <garagedoor>
+Contact MagSwitchFrontDoor "Magnetic Switch Front Door" <door>
+
+Contact DuskDetector "Dusk Detector" <contact>
+
+
