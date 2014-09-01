@@ -14,6 +14,8 @@ Some modifications to this file is currently needed. Modifictaions include addin
 Also included is a Linux service (init.d/openhab-tellstick) that starts a daemon running above mentioned python script, this should be copied to /etc/init.d.
 
 
+The tellstick sevice should be started FIRST then the openhab-tellstick service, otherwise destruction and mayhem are likely!
+
 The tellstick ID's in the tellstick.item file can be found using the tellcore_tool as below:
 
 pi@raspberrypi00 ~ $ tellcore_tool -l
