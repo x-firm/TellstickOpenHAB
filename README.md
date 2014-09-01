@@ -3,6 +3,8 @@ TellstickOpenHAB
 
 Integration example of using Tellstick Duo and openHAB for home automation.
 
+This compilation depends on the python library for tellstick, 'tellcore.telldus'. It must be installed on on the machine that runs these scripts. Also the original telldus tellcore libraries needs to be installed.
+
 This particular setup runs on a Raspberry PI, but nothing is PI specific.
 
 Included is a python script (tellstick/tellstick-openhab.py) that sends REST requests to openHAB to notify of tellstick events not currently picked up by the openHAB tellstick binding. 
