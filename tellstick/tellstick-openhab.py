@@ -14,39 +14,21 @@ import httplib
 logfile = open('/var/log/openhab-tellstick.log', 'a+') 
 
 # Known raw devices
-remote_control            = {'name':'SimpleRemote',       'model': 'selflearning', 'protocol': 'arctech', 'house': 9091782, 'unit':1, 'group':0};
-motion_detector           = {'name':'MotionDetectorHall', 'model': 'selflearning', 'protocol': 'arctech', 'house': 9538298, 'unit':10, 'group':0};
-motion_detector_out       = {'name':'MotionDetectorOut',  'model': 'selflearning', 'protocol': 'arctech', 'house': 8776650, 'unit':10, 'group':0};
-magnetic_switch_cellar_C  = {'name':'MagSwitchCellar',    'model': 'selflearning', 'protocol': 'arctech', 'house': 23188454, 'unit':15, 'group':0};
-magnetic_switch_cellar_D  = {'name':'MagSwitchCellar',    'model': 'selflearning', 'protocol': 'arctech', 'house': 9837886, 'unit':10, 'group':0};
-magnetic_switch_door_C    = {'name':'MagSwitchFrontDoor', 'model': 'selflearning', 'protocol': 'arctech', 'house': 13742794, 'unit':10, 'group':0};
-magnetic_switch_door_D    = {'name':'MagSwitchFrontDoor', 'model': 'selflearning', 'protocol': 'arctech', 'house': 18558118, 'unit':10, 'group':0};
-dusk_detector             = {'name':'DuskDetector',       'model': 'selflearning', 'protocol': 'arctech', 'house': 8927022, 'unit':10, 'group':0};
+
+magnetic_switch_kitchen_C  = {'name':'MagSwitchKitchen',    'model': 'selflearning', 'protocol': 'arctech', 'house': 48801126, 'unit':1, 'group':0};
+magnetic_switch_kitchen_D  = {'name':'MagSwitchKitchen',    'model': 'selflearning', 'protocol': 'arctech', 'house': 15632982, 'unit':10, 'group':0};
 
 
-devices = {9538298: motion_detector,
-           8776650: motion_detector_out,
-           23188454: magnetic_switch_cellar_C,
-           9837886: magnetic_switch_cellar_D,
-           13742794: magnetic_switch_door_C,
-           18558118: magnetic_switch_door_D,
-           9091782: remote_control,
-           8927022: dusk_detector}
+devices = {48801126: magnetic_switch_kitchen_C,
+           15632982: magnetic_switch_kitchen_D}
 
 
-id_dev  = {23188454: 9837886}
-id_unit = {23188454: 10}
-id_dev  = {13742794: 18558118}
-id_unit = {13742794: 10}
+id_dev  = {48801126: 15632982}
+id_unit = {48801126: 1}
 
-value_mapping = {9538298: {'turnon':'OPEN', 'turnoff':'CLOSED'},
-           8776650: {'turnon':'OPEN', 'turnoff':'CLOSED'},
-           23188454: {'turnon':'OPEN', 'turnoff':'CLOSED'},
-           9091782: {'turnon':'ON', 'turnoff':'OFF'},
-           8927022: {'turnon':'OPEN', 'turnoff':'CLOSED'},
-           13742794: {'turnon':'OPEN', 'turnoff':'CLOSED'},
-           18558118: {'turnon':'OPEN', 'turnoff':'CLOSED'},
-           9837886: {'turnon':'OPEN', 'turnoff':'CLOSED'}} 
+
+value_mapping = {48801126: {'turnon':'OPEN', 'turnoff':'CLOSED'},
+                 15632982: {'turnon':'OPEN', 'turnoff':'CLOSED'}}
 
 
 print "Devices are:"
@@ -138,7 +120,7 @@ callbacks.append(core.register_sensor_event(sensor_event))
 
 try:
     while True:
-        core.callback_dispatcher.process_pending_callbacks()
+        core.process_pending_callbacks()
         time.sleep(0.5)
 except KeyboardInterrupt:
     pass
